@@ -2,7 +2,9 @@ module Routes (
 calculateDistance,
 numberOfTrips,
 shortestRoute,
-numberOfRoutes
+numberOfRoutes,
+mkRouteIntoGraph,
+RouteIntoGraph()
 ) where
 
 import Data.Graph.Inductive.Graph
@@ -14,6 +16,9 @@ data RouteIntoGraph = RouteIntoGraph {
   graph :: Gr String Int,
   route :: Route
 }
+
+mkRouteIntoGraph :: Gr String Int -> LPath String -> RouteIntoGraph
+mkRouteIntoGraph graph route = RouteIntoGraph graph route
 
 calculateDistance :: RouteIntoGraph -> Int
 calculateDistance graphRoute = (fromIntegral 1)
