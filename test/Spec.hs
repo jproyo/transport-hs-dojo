@@ -32,7 +32,7 @@ toRoute :: String -> RouteIntoGraph
 toRoute = createRouteGraph . splitString
 
 testCalculateDistance :: String -> Test
-testCalculateDistance route = TestCase (calculateDistance (toRoute route) == fromIntegral 1 @? "Failing")
+testCalculateDistance route = TestCase (calculateDistance (toRoute route) == fromIntegral 9 @? "Failing")
 
 tests :: Test
 tests = TestList [TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC")]

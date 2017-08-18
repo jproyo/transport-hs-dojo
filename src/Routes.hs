@@ -10,6 +10,8 @@ RouteIntoGraph()
 import Data.Graph.Inductive.Graph
 import Data.Graph.Inductive.Tree
 
+import Routes.Internal
+
 type Route = LPath String
 
 data RouteIntoGraph = RouteIntoGraph {
