@@ -3,8 +3,6 @@ calculateDistance,
 numberOfTrips,
 shortestRoute,
 numberOfRoutes,
-mkRouteIntoGraph,
-RouteIntoGraph()
 ) where
 
 import Data.Graph.Inductive.Graph
@@ -12,24 +10,14 @@ import Data.Graph.Inductive.Tree
 
 import Routes.Internal
 
-type Route = LPath String
+calculateDistance :: Gr String Int -> LPath String -> Int
+calculateDistance graph route = (fromIntegral 1)
 
-data RouteIntoGraph = RouteIntoGraph {
-  graph :: Gr String Int,
-  route :: Route
-}
-
-mkRouteIntoGraph :: Gr String Int -> LPath String -> RouteIntoGraph
-mkRouteIntoGraph graph route = RouteIntoGraph graph route
-
-calculateDistance :: RouteIntoGraph -> Int
-calculateDistance graphRoute = (fromIntegral 1)
-
-numberOfTrips :: RouteIntoGraph -> Int
+numberOfTrips :: Gr String Int -> LPath String -> Int
 numberOfTrips = undefined
 
-shortestRoute :: RouteIntoGraph -> Int
+shortestRoute :: Gr String Int -> LPath String -> Int
 shortestRoute = undefined
 
-numberOfRoutes :: RouteIntoGraph -> Int
+numberOfRoutes :: Gr String Int -> LPath String -> Int
 numberOfRoutes = undefined

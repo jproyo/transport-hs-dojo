@@ -24,15 +24,15 @@ graph = G.mkGraph genLNodes genLEdges
 splitString :: String -> [String]
 splitString str = map (:[]) str
 
-createRouteGraph :: [String] -> RouteIntoGraph
-createRouteGraph str = mkRouteIntoGraph graph (extractFrom swapedNodes str)
+createRoute :: [String] -> G.LPath String
+createRoute str = extractFrom swapedNodes str
     where extractFrom lnodes str = G.LP (map (lookupNode lnodes) str)
 
-toRoute :: String -> RouteIntoGraph
-toRoute = createRouteGraph . splitString
+toRoute :: String -> G.LPath String
+toRoute = createRoute . splitString
 
 testCalculateDistance :: String -> Test
-testCalculateDistance route = TestCase (calculateDistance (toRoute route) == fromIntegral 9 @? "Failing")
+testCalculateDistance route = TestCase (calculateDistance graph (toRoute route) == fromIntegral 9 @? "Failing")
 
 tests :: Test
 tests = TestList [TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC")]
