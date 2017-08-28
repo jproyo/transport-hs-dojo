@@ -32,11 +32,15 @@ createRoute str = extractFrom swapedNodes str
 toRoute :: String -> G.LPath String
 toRoute = createRoute . splitString
 
-testCalculateDistance :: String -> Test
-testCalculateDistance route = TestCase (calculateDistance graph (toRoute route) == Just 9 @? "Failing")
+testCalculateDistance :: String -> Maybe Int -> Test
+testCalculateDistance route result = TestCase (calculateDistance graph (toRoute route) == result @? "Failing")
 
 tests :: Test
-tests = TestList [TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC")]
+tests = TestList [
+  TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC" (Just 9)),
+  TestLabel "testCalculateDistance A-D" (testCalculateDistance "AD" (Just 5)),
+  TestLabel "testCalculateDistance A-D-C" (testCalculateDistance "ADC" (Just 13))
+  ]
 
 main :: IO Counts
 main = runTestTT tests
