@@ -32,8 +32,14 @@ createRoute str = extractFrom swapedNodes str
 toRoute :: String -> G.LPath String
 toRoute = createRoute . splitString
 
+pointToIndex :: String -> G.Node
+pointToIndex point = fst (lookupNode swapedNodes point)
+
 testCalculateDistance :: String -> Maybe Int -> Test
-testCalculateDistance route result = TestCase (calculateDistance graph (toRoute route) == result @? "Failing")
+testCalculateDistance route result = TestCase (assertEqual "testCalculateDistance failed, " (calculateDistance graph (toRoute route)) result)
+
+testCalculateShortestPath :: String -> String -> Maybe Int -> Test
+testCalculateShortestPath start finish result = TestCase (assertEqual "testCalculateShortestPath failed, " (shortestRoute graph (pointToIndex start) (pointToIndex finish)) result)
 
 tests :: Test
 tests = TestList [
@@ -41,7 +47,10 @@ tests = TestList [
   TestLabel "testCalculateDistance A-D" (testCalculateDistance "AD" (Just 5)),
   TestLabel "testCalculateDistance A-D-C" (testCalculateDistance "ADC" (Just 13)),
   TestLabel "testCalculateDistance A-E-B-C-D" (testCalculateDistance "AEBCD" (Just 22)),
-  TestLabel "testCalculateDistance A-E-D" (testCalculateDistance "AED" Nothing)
+  TestLabel "testCalculateDistance A-E-D" (testCalculateDistance "AED" Nothing),
+  TestLabel "testCalculateShortestPath A to C" (testCalculateShortestPath "A" "C" (Just 9)),
+  TestLabel "testCalculateShortestPath B to D" (testCalculateShortestPath "B" "D" (Just 12)),
+  TestLabel "testCalculateShortestPath B to Z" (testCalculateShortestPath "B" "Z" Nothing)
   ]
 
 main :: IO Counts
