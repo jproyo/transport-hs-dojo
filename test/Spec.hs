@@ -1,5 +1,6 @@
 import Routes
 import Test.HUnit
+import Data.Maybe
 import Data.Tuple
 import qualified Data.Graph.Inductive.Graph as G
 import Data.Graph.Inductive.Tree
@@ -32,7 +33,7 @@ toRoute :: String -> G.LPath String
 toRoute = createRoute . splitString
 
 testCalculateDistance :: String -> Test
-testCalculateDistance route = TestCase (calculateDistance graph (toRoute route) == fromIntegral 9 @? "Failing")
+testCalculateDistance route = TestCase (calculateDistance graph (toRoute route) == Just 9 @? "Failing")
 
 tests :: Test
 tests = TestList [TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC")]
