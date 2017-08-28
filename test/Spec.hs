@@ -39,7 +39,9 @@ tests :: Test
 tests = TestList [
   TestLabel "testCalculateDistance A-B-C" (testCalculateDistance "ABC" (Just 9)),
   TestLabel "testCalculateDistance A-D" (testCalculateDistance "AD" (Just 5)),
-  TestLabel "testCalculateDistance A-D-C" (testCalculateDistance "ADC" (Just 13))
+  TestLabel "testCalculateDistance A-D-C" (testCalculateDistance "ADC" (Just 13)),
+  TestLabel "testCalculateDistance A-E-B-C-D" (testCalculateDistance "AEBCD" (Just 22)),
+  TestLabel "testCalculateDistance A-E-D" (testCalculateDistance "AED" Nothing)
   ]
 
 main :: IO Counts
