@@ -17,9 +17,7 @@ calculateDistance :: Gr String Int -> LPath String -> Maybe Int
 calculateDistance graph route = foldM (fmap . (+)) 0 allPaths
   where allPaths = map extractLength routePaired
         routePaired = pairLPath route
-        extractLength pair = case (findDestination graph pair) of
-                                Nothing -> Nothing
-                                Just (x,y) -> Just y
+        extractLength pair = liftM snd (findDestination graph pair)
 
 numberOfTrips :: Gr String Int -> Node -> Node -> Maybe Int
 numberOfTrips graph start finish = undefined
