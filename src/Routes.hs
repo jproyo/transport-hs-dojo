@@ -3,6 +3,7 @@ calculateDistance,
 numberOfTrips,
 shortestRoute,
 numberOfRoutes,
+fact
 ) where
 
 import Control.Monad
@@ -27,3 +28,8 @@ shortestRoute graph start finish = spLength start finish graph
 
 numberOfRoutes :: Gr String Int -> LPath String -> Int
 numberOfRoutes = undefined
+
+fact :: Int -> Int
+fact n = loop 1 n
+  where loop acc x | x == 0 = acc
+                   | otherwise = loop (acc * x) (x - 1)
